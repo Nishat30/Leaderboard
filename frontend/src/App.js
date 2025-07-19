@@ -17,7 +17,7 @@ function App() {
     // Fetch all users
     const fetchUsers = useCallback(async () => {
         try {
-            const response = await axios.get(`${API_URL}/users`);
+            const response = await axios.get(`${API_URL}/api/users`);
             setUsers(response.data);
             if (response.data.length > 0 && !selectedUserId) {
                 // Select first user by default if no user is selected
@@ -37,7 +37,7 @@ function App() {
     // Fetch leaderboard
     const fetchLeaderboard = useCallback(async () => {
         try {
-            const response = await axios.get(`${API_URL}/leaderboard`);
+            const response = await axios.get(`${API_URL}/api/leaderboard`);
             setLeaderboard(response.data);
         } catch (error) {
             console.error('Error fetching leaderboard:', error);
@@ -55,7 +55,7 @@ function App() {
     // Handle adding a new user
     const handleAddUser = async (userName) => {
         try {
-            const response = await axios.post(`${API_URL}/users`, { name: userName });
+            const response = await axios.post(`${API_URL}/api/users`, { name: userName });
             alert(`User "${response.data.name}" added successfully!`);
             fetchUsers(); // Refresh user list
         } catch (error) {
@@ -71,7 +71,7 @@ function App() {
             return;
         }
         try {
-            const response = await axios.post(`${API_URL}/users/claim-points`, { userId: selectedUserId });
+            const response = await axios.post(`${API_URL}/api/users/claim-points`, { userId: selectedUserId });
             setLastClaimMessage(`Claimed ${response.data.pointsAwarded} points for ${response.data.user.name}!`);
             fetchUsers(); // Update user points in selection list
             fetchLeaderboard(); // Update leaderboard
