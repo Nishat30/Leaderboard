@@ -1,0 +1,279 @@
+/* Universal Box Sizing for consistency */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Ensure full height for HTML, Body, and Root div */
+html, body, #root {
+    height: 100%; /* Make them take 100% of viewport height */
+    margin: 0;   /* Remove default browser margins */
+    padding: 0;  /* Remove default browser padding */
+    overflow: auto; /* Allow scrolling if content overflows */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #1a1a2e; /* Fallback for background, will be hidden by image */
+    color: #fff;
+    /* Display flex and center content, but allow app-container to define height */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to start, let app-container handle its own vertical flow */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
+
+.app-container {
+    width: 100%; /* Take full width of parent */
+    min-height: 100vh; /* This ensures it spans the full viewport height vertically */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box; /* Crucial for padding not to add to total width/height */
+
+    /* Background Image Styling - Crucial for fitting */
+    background-size: cover;      /* Scales the background image to cover the entire container */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Makes the background fixed relative to the viewport */
+}
+
+/* Header Styling */
+.header {
+    margin-bottom: 30px;
+    text-align: center;
+    padding-top: 20px; /* Add some space from the top of the screen */
+}
+
+h1 {
+    color: #e0e0e0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 2.5em; /* Make header more prominent */
+}
+
+/* Combined Content Box Styling */
+.main-content-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top if their height differs */
+    width: 100%;
+    max-width: 1000px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: -10px; /* Space from header */
+    margin-bottom: 40px; /* Add space at the bottom if content is short */
+}
+
+.main-content-box h2 {
+    color: #fff;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+.actions-section,
+.leaderboard-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+.vertical-divider {
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 0 20px;
+    align-self: stretch;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .main-content-box {
+        flex-direction: column;
+        gap: 30px;
+        max-width: 90%;
+        padding: 25px;
+    }
+    .vertical-divider {
+        width: 100%;
+        height: 1px;
+        margin: 20px 0;
+    }
+    .header h1 {
+        font-size: 2em;
+    }
+    .main-content-box h2 {
+        font-size: 1.5em;
+    }
+}
+
+/* Messages */
+.claim-message {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #aaffaa; /* Success green */
+    text-align: center;
+}
+
+/* User Selection Component Styles */
+.user-selection-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-selection-container label {
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.user-selection-container select,
+.user-selection-container input[type="text"] {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.3); /* Darker transparent background */
+    color: #fff;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.user-selection-container select:focus,
+.user-selection-container input[type="text"]:focus {
+    border-color: #007bff; /* Highlight on focus */
+}
+
+.add-user-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.add-user-input-group input {
+    flex-grow: 1;
+}
+
+.add-user-input-group button {
+    padding: 10px 20px;
+    background-color: #28a745; /* Green for Add User */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+.add-user-input-group button:hover {
+    background-color: #218838;
+}
+
+/* Claim Button Styles */
+.claim-button {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: #007bff; /* Blue for Claim Points */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.claim-button:hover {
+    background-color: #0056b3;
+}
+
+/* Leaderboard List Styles */
+.leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: rgba(255, 255, 255, 0.08); /* Slightly lighter background for list items */
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.leaderboard-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.leaderboard-item .rank {
+    font-weight: bold;
+    color: #ffd700; /* Gold color for rank */
+    width: 30px; /* Fixed width for rank for alignment */
+    text-align: left;
+}
+
+.leaderboard-item .name {
+    flex-grow: 1;
+    margin-left: 10px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.leaderboard-item .points {
+    font-weight: bold;
+    color: #ff9900; /* Orange color for points */
+    margin-left: 10px; /* Space between name and points */
+}
+
+.no-users-message {
+    text-align: center;
+    font-style: italic;
+    color: #bbb;
+    margin-top: 20px;
+}
+
+.app-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw; /* ✅ ADD THIS LINE */
+    overflow-x: hidden; /* ✅ Optional: prevent sideways scroll */
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  .actions-section {
+    padding-right: 50px;
+    min-width: 300px;
+    max-width: 450px;
+    border-radius: 16px;
+    max-width: 90%;
+    margin: 10px auto;
+  }
+}

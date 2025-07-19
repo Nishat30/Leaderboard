@@ -1,0 +1,287 @@
+/* Theme Colors */
+:root {
+  --bg-dark: #121212;
+  --text-dark: #ffffff;
+  --bg-light: #f9f9f9;
+  --text-light: #222222;
+  --accent: #00bcd4;
+  --rank-1-color: #ffd700; /* Gold */
+  --rank-2-color: #c0c0c0; /* Silver */
+  --rank-3-color: #cd7f32; /* Bronze */
+}
+
+/* Global Reset */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Leaderboard Styles */
+.leaderboard-container {
+  padding: 20px;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+  max-width: 900px;
+  border-radius: 15px;
+  margin-right:10px;
+  margin-left:5px;
+  /* Glassmorphism styles */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  color: var(--text-dark); /* Ensure text is visible on glassmorphism */
+}
+
+
+.leaderboard.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.leaderboard.light {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--accent); /* Make heading stand out */
+}
+
+.toggle-btn {
+  margin: 10px auto;
+  display: block;
+  padding: 8px 16px;
+  font-weight: bold;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Top Three Display */
+.top-three-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Align items to the bottom */
+  margin-bottom: 20px;
+  margin-top:30px;
+  position: relative;
+  min-height: 200px; /* Ensure enough space for height variations */
+}
+
+.top-three-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0px; /* Adjust spacing between top 3 */
+  position: relative;
+  text-align: center;
+  padding-bottom: 10px; /* Space for the name and points */
+}
+
+/* Specific positioning for Rank 1, 2, 3 */
+.top-three-item.rank-1 {
+  order: 2; /* Put Rank 1 in the middle */
+  transform: translateY(-30px); /* Move Rank 1 slightly above */
+  font-size: 1.2em; /* Make Rank 1 slightly larger */
+}
+
+.top-three-item.rank-2 {
+  order: 1; /* Put Rank 2 to the left of Rank 1 */
+}
+
+.top-three-item.rank-3 {
+  order: 3; /* Put Rank 3 to the right of Rank 1 */
+}
+
+.rank-circle {
+  width: 100px; /* Size of the circle */
+  height: 100px;
+  border-radius: 50%;
+  /* Removed display: flex, justify-content, align-items, font-weight, font-size, color
+     as they are for content *inside* the circle which is now just an image */
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 3px solid; /* Add a border to the circle */
+  overflow: hidden; /* Crucial to clip the image within the circle */
+  position: relative; /* Needed for absolute positioning of the image */
+}
+
+.profile-pic-rank {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover; /* Ensures the image covers the circle without distortion */
+  z-index: 1; /* Ensure profile picture is on top of the circle background */
+  opacity: 1; /* CRITICAL FIX: Set to 1 for full visibility */
+}
+
+
+/* Specific colors and sizes for rank circles */
+.top-three-item.rank-1 .rank-circle {
+  background-color: var(--rank-1-color);
+  border-color: var(--rank-1-color);
+  width: 120px; /* Larger circle for Rank 1 */
+  height: 120px;
+  /* Removed font-size here as it's not applicable to the image */
+}
+
+.top-three-item.rank-2 .rank-circle {
+  background-color: var(--rank-2-color);
+  border-color: var(--rank-2-color);
+}
+
+.top-three-item.rank-3 .rank-circle {
+  background-color: var(--rank-3-color);
+  border-color: var(--rank-3-color);
+}
+
+.top-three-item .name {
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: 1.1em;
+}
+
+.top-three-item .points {
+  color: var(--accent);
+  font-size: 0.9em;
+}
+
+/* User Cards for the rest of the leaderboard */
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.leaderboard-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Maintain gap between items */
+  transition: transform 0.2s ease;
+}
+
+.leaderboard-item:hover {
+  transform: scale(1.01);
+}
+
+.leaderboard-item .rank {
+  font-weight: bold;
+  font-size: 1em;
+  width: 30px; /* Fixed width for rank */
+  text-align: right; /* Align rank to the right */
+  padding-right:5px;
+}
+
+/* Style for profile picture in the list */
+.profile-pic-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto; /* Center horizontally */
+  display: block;
+  border: 2px solid #00e0ff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+.leaderboard-item .name {
+  flex: 1; /* Allows name to take up available space */
+  font-size: 1em;
+}
+
+.leaderboard-item .points {
+  font-weight: bold;
+  color: var(--accent);
+  text-align: right; /* Align points to the right */
+  white-space: nowrap; /* Prevent points from wrapping */
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .top-three-container {
+    flex-direction: column; /* Stack top 3 vertically on smaller screens */
+    align-items: center;
+  }
+
+  .top-three-item {
+    margin: 15px 0; /* Adjust vertical spacing */
+    transform: translateY(0) !important; /* Reset transform for vertical stack */
+  }
+  
+  .leaderboard-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .leaderboard-item .rank,
+  .profile-pic-circle,
+  .leaderboard-item .name,
+  .leaderboard-item .points {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px; /* Add some spacing when stacked */
+  }
+
+  .leaderboard-item .rank {
+    text-align: left; /* Adjust rank alignment for mobile */
+    padding-right: 0;
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+  .leaderboard-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .top-three {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .top-user-card img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .user-card {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 90vw;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .user-card img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+}
+
+@media screen and (max-width: 480px) {
+  .profile-pic-circle {
+    width: 70px;
+    height: 70px;
+  }
+}
